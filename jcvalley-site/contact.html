@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>문의하기 | JCValley</title>
+<meta name="description" content="JCValley 파트너십 및 위탁 운영 문의. 대학·산학협력단 글로벌 연수, 공공기관 북미 진출, 스타트업 법인 전환 및 현지 IR·GTM 상담을 요청하세요." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        navy:   { 900:'#060F1F', 800:'#0A192F', 700:'#0F2039', 600:'#152A47' },
+        accent: { DEFAULT:'#2563EB', light:'#3B82F6', soft:'#60A5FA' },
+        ink:    { 900:'#0B1220', 600:'#475569', 400:'#94A3B8' }
+      },
+      fontFamily: {
+        sans:    ['Pretendard Variable','Pretendard','system-ui','sans-serif'],
+        display: ['Space Grotesk','Pretendard Variable','sans-serif'],
+        mono:    ['IBM Plex Mono','monospace']
+      },
+      letterSpacing: { tightest: '-0.045em' }
+    }
+  }
+}
+</script>
+<style>
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  body { -webkit-font-smoothing: antialiased; }
+
+  /* ===== Korean typography: never break inside a word ===== */
+  body, p, h1, h2, h3, h4, h5, h6, span, div, a, li, dt, dd,
+  label, button, blockquote, figcaption, th, td,
+  input, select, textarea, option {
+    word-break: keep-all;
+    overflow-wrap: break-word;   /* only very long unbreakable strings (URLs, emails) wrap */
+  }
+
+  /* Balanced line lengths for headings and pull quotes */
+  h1, h2, h3, blockquote, blockquote p {
+    text-wrap: balance;
+  }
+  /* Body copy: avoid orphan last words without forcing equal-length lines */
+  p, .weapon-desc, .op-desc, .fund-sub {
+    text-wrap: pretty;
+  }
+  ::selection { background:#2563EB; color:#fff; }
+
+  /* Hero grid atmosphere */
+  .grid-field {
+    background-image:
+      linear-gradient(to right, rgba(148,163,184,.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148,163,184,.07) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+  .glow {
+    background: radial-gradient(60% 60% at 50% 0%, rgba(37,99,235,.30) 0%, rgba(37,99,235,0) 70%);
+  }
+
+  /* Reveal on scroll */
+  .reveal { opacity:0; transform: translateY(18px); transition: opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1); }
+  .reveal.in { opacity:1; transform:none; }
+
+  /* Logo marquee */
+  @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee-track { animation: slide 34s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+
+  /* Focus visibility */
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid #3B82F6; outline-offset: 2px; border-radius: 4px;
+  }
+
+  /* Language selector (KR / EN) */
+  .lang-opt {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px; font-weight: 500; letter-spacing: .02em;
+    color: #64748B; background: transparent; padding: 4px 2px;
+    transition: color .2s;
+  }
+  .lang-opt:hover { color: #CBD5E1; }
+  .lang-opt.is-active { color: #FFFFFF; font-weight: 600; }
+  .lang-sep { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #334155; user-select: none; }
+  @media (max-width: 1023px) { .lang-opt { font-size: 15px; padding: 6px 4px; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity:1 !important; transform:none !important; transition:none; }
+    .marquee-track { animation: none; }
+  }
+</style>
+</head>
+
+<body class="font-sans bg-white text-ink-900 antialiased">
+
+<!-- ============ NAV ============ -->
+<header id="nav" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="flex items-center justify-between h-[72px]">
+
+      <a href="index.html" class="flex items-center gap-2.5 shrink-0">
+        <span class="w-8 h-8 rounded-md bg-accent grid place-items-center font-display font-bold text-white text-sm">JC</span>
+        <span id="brand" class="font-display font-semibold tracking-tight text-white text-[17px]">JCValley</span>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-9">
+        <a href="index.html#about"       class="nav-link text-[14.5px] font-medium text-slate-300 hover:text-white transition" data-en="About Us">회사 소개</a>
+        <a href="index.html#partnerships" class="nav-link text-[14.5px] font-medium text-slate-300 hover:text-white transition" data-en="Partnerships">파트너십</a>
+        <a href="index.html#operations"  class="nav-link text-[14.5px] font-medium text-slate-300 hover:text-white transition" data-en="Operations">수주·운영 실적</a>
+        <a href="index.html#portfolio"   class="nav-link text-[14.5px] font-medium text-slate-300 hover:text-white transition" data-en="Investment & Portfolio">투자·포트폴리오</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <div class="hidden lg:flex items-center gap-2 px-2.5 py-1.5 rounded-md" role="group" aria-label="언어 선택 / Select language">
+          <svg class="w-[18px] h-[18px] shrink-0 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/>
+          </svg>
+          <button type="button" class="lang-opt is-active" data-lang="ko">KR</button>
+          <span class="lang-sep" aria-hidden="true">/</span>
+          <button type="button" class="lang-opt" data-lang="en">EN</button>
+        </div>
+        <a href="index.html" class="text-[13px] sm:text-[14px] font-semibold px-3.5 sm:px-5 py-2.5 rounded-lg border border-white/15 hover:border-white/35 hover:bg-white/5 text-white transition whitespace-nowrap">
+          <span class="hidden sm:inline" data-en="&larr; Back to Home">&larr; 홈으로 돌아가기</span>
+          <span class="sm:hidden" data-en="Home">홈으로</span>
+        </a>
+        <button id="menuBtn" class="lg:hidden p-2 -mr-2 text-slate-200" aria-label="메뉴 열기" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobileMenu" class="lg:hidden hidden bg-navy-800/98 backdrop-blur border-t border-white/10">
+    <div class="px-6 py-4 flex flex-col gap-1">
+      <a href="index.html#about" class="py-3 text-slate-200 text-[15px]" data-en="About Us">회사 소개</a>
+      <a href="index.html#partnerships" class="py-3 text-slate-200 text-[15px]" data-en="Partnerships">파트너십</a>
+      <a href="index.html#operations" class="py-3 text-slate-200 text-[15px]" data-en="Operations">수주·운영 실적</a>
+      <a href="index.html#portfolio" class="py-3 text-slate-200 text-[15px]" data-en="Investment & Portfolio">투자·포트폴리오</a>
+
+      <div class="mt-3 pt-4 border-t border-white/10">
+        <div class="flex items-center gap-2.5">
+          <svg class="w-[18px] h-[18px] shrink-0 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/>
+          </svg>
+          <button type="button" class="lang-opt is-active" data-lang="ko">KR</button>
+          <span class="lang-sep" aria-hidden="true">/</span>
+          <button type="button" class="lang-opt" data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ PAGE HEADER ============ -->
+<section class="relative bg-navy-800 overflow-hidden pt-[72px]">
+  <div class="absolute inset-0 grid-field"></div>
+  <div class="absolute inset-0 glow"></div>
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-10 pt-14 pb-14 lg:pt-20 lg:pb-16">
+    <a href="index.html" class="reveal inline-flex items-center gap-1.5 text-[13.5px] font-medium text-slate-400 hover:text-white transition" data-en="&larr; Back to Home">
+      &larr; 홈으로 돌아가기
+    </a>
+    <h1 class="reveal mt-5 font-display font-bold text-white tracking-tightest leading-[1.2] text-[30px] sm:text-[40px]" data-en="Partnership &amp; Proposal Inquiry">
+      파트너십·위탁 운영 문의
+    </h1>
+    <p class="reveal mt-4 max-w-xl text-[15.5px] leading-relaxed text-slate-300" data-en="Tell us about your institution and goals, and we'll get back to you within 2 business days.">
+      기관 정보와 원하시는 내용을 남겨주시면 영업일 기준 2일 이내 회신드립니다.
+    </p>
+  </div>
+</section>
+
+<section id="contact" class="bg-slate-50 py-20 lg:py-28">
+  <div class="max-w-6xl mx-auto px-6 lg:px-10">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-14">
+
+      <div class="lg:col-span-5 reveal">
+        <div class="font-mono text-[12px] tracking-[0.2em] text-accent uppercase mb-4">Contact &amp; Proposal</div>
+        <h2 class="font-display font-bold text-ink-900 text-[28px] lg:text-[36px] leading-[1.28] tracking-tight" data-en="Start Your Cross-Border Partnership Between Silicon Valley &amp; Korea">
+          한국과 실리콘밸리를 잇는<br />글로벌 파트너십을 시작하세요
+        </h2>
+        <p class="mt-5 text-[16px] leading-relaxed text-ink-600" data-en="From university global training and public GTM programs to startup US entity flips and VC investments, we deliver tailored proposals and pre-diagnostics.">
+          대학 및 산학협력단의 글로벌 현장 연수부터 공공기관 GTM,
+          스타트업 북미 진출(Flip/투자)까지 맞춤형 운영 제안서와 사전 진단을 제공합니다.
+        </p>
+
+        <ul class="mt-8 space-y-3">
+          <li class="contact-point">
+            <span class="chk"></span>
+            <span><b class="cp-tag" data-en="[Universities]">[대학·산학협력단]</b> <span data-en="Global field study, student and faculty venture programs, and local acceleration">글로벌 현장 견학, 학생·교원 창업 및 현지 액셀러레이팅</span></span>
+          </li>
+          <li class="contact-point">
+            <span class="chk"></span>
+            <span><b class="cp-tag" data-en="[Public / Tech Holdings]">[공공·기술지주]</b> <span data-en="Global GTM marketing for invested companies and Silicon Valley VC IR linkage">출자·지원 기업 글로벌 GTM 마케팅 &amp; 실리콘밸리 VC IR 연계</span></span>
+          </li>
+          <li class="contact-point">
+            <span class="chk"></span>
+            <span><b class="cp-tag" data-en="[Startups]">[스타트업]</b> <span data-en="US entity flip, local VC fundraising, and hands-on backing from our USA headquarters">북미 법인 전환(Flip), 현지 VC 투자 유치 및 USA 본사 직접 밀착 지원</span></span>
+          </li>
+        </ul>
+
+        <dl class="mt-10 space-y-5 text-[14.5px]">
+          <div class="flex gap-4">
+            <dt class="w-24 shrink-0 font-mono text-[12px] uppercase tracking-widest text-ink-400 pt-1">Reply</dt>
+            <dd class="text-ink-900 font-medium" data-en="Within 2 business days">영업일 기준 2일 이내 회신</dd>
+          </div>
+          <div class="flex gap-4">
+            <dt class="w-24 shrink-0 font-mono text-[12px] uppercase tracking-widest text-ink-400 pt-1">Email</dt>
+            <!-- TODO: 실제 수신 주소로 교체 필요 --><dd class="text-ink-900 font-medium">contact@jcvalley.com</dd>
+          </div>
+          <div class="flex gap-4">
+            <dt class="w-24 shrink-0 font-mono text-[12px] uppercase tracking-widest text-ink-400 pt-1">Office</dt>
+            <!-- TODO: 실제 사무소 소재지 확인 필요 --><dd class="text-ink-900 font-medium">Santa Clara, CA · Seoul, KR</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="lg:col-span-7 reveal">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/50 p-7 lg:p-9">
+          <form id="proposalForm" novalidate>
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div class="sm:col-span-2">
+                <label for="org" class="lbl" data-en="Institution / University / Company">기관·대학·기업명 <span class="text-accent">*</span></label>
+                <input id="org" name="org" type="text" required class="fld" placeholder="예) OO대학교 산학협력단" />
+              </div>
+              <div>
+                <label for="name" class="lbl" data-en="Name & title">담당자 성함 및 직급 <span class="text-accent">*</span></label>
+                <input id="name" name="name" type="text" required class="fld" placeholder="예) 김담당 팀장" />
+              </div>
+              <div>
+                <label for="contact" class="lbl" data-en="Phone & email">연락처 &amp; 이메일 <span class="text-accent">*</span></label>
+                <input id="contact" name="contact" type="text" required class="fld" placeholder="010-0000-0000 / name@org.kr" />
+              </div>
+              <div class="sm:col-span-2">
+                <label for="type" class="lbl" data-en="Program type">희망 프로그램 유형</label>
+                <select id="type" name="type" class="fld fld-select">
+                  <option>[대학/산학협력단] 글로벌 현장견학 및 해외 창업 위탁 프로그램 문의</option>
+                  <option>[공공/기술지주] 출자기업 글로벌 GTM 및 현지 밀착 솔루션 문의</option>
+                  <option>[스타트업] 미국 진출(법인 전환 및 현지 투자) 사전 진단 신청</option>
+                  <option>[기타] 전략적 업무협약(MOU) 및 파트너십 문의</option>
+                </select>
+              </div>
+              <div class="sm:col-span-2">
+                <label for="message" class="lbl" data-en="Details of your request">문의 및 요청 사항</label>
+                <p class="text-[12.5px] text-ink-500 -mt-1 mb-2" data-en="Need our detailed company profile (PPT/PDF)? Just mention it here and we'll send it along with our reply.">회사소개 자료(PPT/PDF)가 필요하시면 이 란에 요청해주세요 — 회신 시 함께 보내드립니다.</p>
+                <textarea id="message" name="message" rows="5" class="fld resize-none" placeholder="사업 규모, 예상 참여 인원, 희망 시기 등을 적어주시면 제안서가 더 정확해집니다."></textarea>
+              </div>
+            </div>
+
+            <div class="mt-6 flex items-start gap-3">
+              <input id="agree" type="checkbox" required class="mt-0.5 w-4 h-4 rounded border-slate-300 text-accent focus:ring-accent" />
+              <label for="agree" class="text-[13.5px] leading-relaxed text-ink-600" data-en="I agree to the collection and use of the information above for the purpose of responding to this inquiry.">
+                문의 회신을 위한 개인정보 수집·이용에 동의합니다.
+              </label>
+            </div>
+
+            <button type="submit" class="mt-7 w-full py-4 rounded-lg bg-navy-800 hover:bg-accent text-white font-semibold text-[15.5px] transition-colors" data-en="Request a tailored proposal">
+              맞춤 제안서 및 안내 요청하기
+            </button>
+
+            <p id="formNote" class="hidden mt-4 text-[14px] font-medium text-accent text-center"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-point { display:flex; align-items:flex-start; gap:10px; font-size:14.5px; font-weight:500; color:#334155; line-height:1.65; }
+  .cp-tag { color:#1D4ED8; font-weight:700; margin-right:2px; }
+  .chk {
+    flex:0 0 auto; width:18px; height:18px; margin-top:2px; border-radius:6px; background:#EFF6FF; border:1px solid #DBEAFE;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%232563EB' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6L9 17l-5-5'/></svg>");
+    background-repeat:no-repeat; background-position:center;
+  }
+  .lbl { display:block; font-size:13.5px; font-weight:600; color:#334155; margin-bottom:8px; }
+  .fld {
+    width:100%; padding:12px 14px; border-radius:10px; border:1px solid #CBD5E1;
+    background-color:#fff; background-image:none;
+    font-size:15px; color:#0B1220; line-height:1.5; transition: border-color .2s, box-shadow .2s;
+  }
+  /* Select: single chevron, never tiled */
+  .fld-select {
+    -webkit-appearance:none; -moz-appearance:none; appearance:none;
+    padding-right:44px; cursor:pointer; text-overflow:ellipsis;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%2364748B' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M4 6l4 4 4-4'/></svg>");
+    background-repeat:no-repeat;
+    background-position:right 16px center;
+    background-size:16px 16px;
+  }
+  .fld-select::-ms-expand { display:none; }
+  .fld-select:focus { background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%232563EB' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M4 6l4 4 4-4'/></svg>"); }
+  .fld-select option { color:#0B1220; }
+  .fld::placeholder { color:#94A3B8; }
+  .fld:focus { outline:none; border-color:#2563EB; box-shadow: 0 0 0 4px rgba(37,99,235,.12); }
+  .fld:user-invalid { border-color:#DC2626; }
+</style>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-navy-900 text-slate-400 py-12">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <div class="flex items-center gap-2.5">
+        <span class="w-7 h-7 rounded-md bg-accent grid place-items-center font-display font-bold text-white text-[12px]">JC</span>
+        <span class="font-display font-semibold text-white text-[15px]">JCValley</span>
+      </div>
+      <div class="flex flex-wrap gap-x-7 gap-y-2 text-[13.5px]">
+        <a href="index.html#about" class="hover:text-white transition" data-en="About Us">회사 소개</a>
+        <a href="index.html#partnerships" class="hover:text-white transition" data-en="Partnerships">파트너십</a>
+        <a href="index.html#operations" class="hover:text-white transition" data-en="Operations">수주·운영 실적</a>
+        <a href="contact.html" aria-current="page" class="hover:text-white transition" data-en="Contact">문의하기</a>
+      </div>
+    </div>
+    <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:justify-between gap-2 text-[12.5px] text-slate-500">
+      <p>© 2026 JCValley Inc. All rights reserved.</p>
+      <p class="font-mono">Santa Clara, CA · Seoul, KR</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* ---------- Nav: scroll state ---------- */
+  const nav = document.getElementById('nav');
+  const setNav = () => {
+    if (window.scrollY > 24) {
+      nav.classList.add('bg-navy-900/90','backdrop-blur-md','shadow-lg','shadow-navy-900/30','border-white/10');
+    } else {
+      nav.classList.remove('bg-navy-900/90','backdrop-blur-md','shadow-lg','shadow-navy-900/30','border-white/10');
+    }
+  };
+  setNav(); window.addEventListener('scroll', setNav, { passive: true });
+
+  /* ---------- Mobile menu ---------- */
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('hidden') === false;
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  /* ---------- Reveal on scroll ---------- */
+  const revealIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (Math.min(i, 4) * 70) + 'ms';
+    revealIO.observe(el);
+  });
+
+  /* ---------- Stat counters ---------- */
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const animate = (el) => {
+    const target = parseFloat(el.dataset.target);
+    const decimals = parseInt(el.dataset.decimals, 10) || 0;
+    if (reduceMotion) { el.textContent = target.toFixed(decimals); return; }
+    const dur = 1600, start = performance.now();
+    const tick = (now) => {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(decimals);
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toFixed(decimals);
+    };
+    requestAnimationFrame(tick);
+  };
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { animate(e.target); counterIO.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter').forEach(el => counterIO.observe(el));
+
+  /* ---------- Operations filter ---------- */
+  const buttons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.op-card');
+  const resultCount = document.getElementById('resultCount');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      const f = btn.dataset.filter;
+      let n = 0;
+      cards.forEach(c => {
+        const show = (f === 'all' || c.dataset.cat === f);
+        c.classList.toggle('is-hidden', !show);
+        if (show) n++;
+      });
+      resultCount.textContent = n;
+    });
+  });
+
+  /* ---------- Language selector (KR / EN) ---------- */
+  let lang = 'ko';
+  const langOpts = document.querySelectorAll('.lang-opt');
+  const nodes = document.querySelectorAll('[data-en]');
+  nodes.forEach(n => n.dataset.ko = n.innerHTML);
+
+  function setLang(next) {
+    if (next === lang) return;
+    lang = next;
+    nodes.forEach(n => { n.innerHTML = (lang === 'en') ? n.dataset.en : n.dataset.ko; });
+    document.documentElement.lang = lang;
+    langOpts.forEach(o => {
+      const on = o.dataset.lang === lang;
+      o.classList.toggle('is-active', on);
+      o.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+
+  langOpts.forEach(opt => {
+    opt.setAttribute('aria-pressed', opt.classList.contains('is-active') ? 'true' : 'false');
+    opt.addEventListener('click', () => {
+      setLang(opt.dataset.lang);
+      if (!mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.add('hidden');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  /* ---------- Form ---------- */
+  const form = document.getElementById('proposalForm');
+  const note = document.getElementById('formNote');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      note.textContent = (lang === 'en')
+        ? 'Fill in the required fields to send your request.'
+        : '필수 항목을 입력하면 요청을 보낼 수 있습니다.';
+      note.classList.remove('hidden','text-accent');
+      note.classList.add('text-red-600');
+      form.reportValidity();
+      return;
+    }
+    note.textContent = (lang === 'en')
+      ? 'Request sent. We will reply within 2 business days.'
+      : '요청이 접수되었습니다. 영업일 기준 2일 이내 회신드립니다.';
+    note.classList.remove('hidden','text-red-600');
+    note.classList.add('text-accent');
+    form.reset();
+  });
+})();
+</script>
+</body>
+</html>
